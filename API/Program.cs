@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-
+builder.Services.AddCors();
 
 builder.Services.AddDbContext<DataContext>(opt =>
 {
@@ -16,7 +16,7 @@ builder.Services.AddDbContext<DataContext>(opt =>
 });
 var app = builder.Build();
 
-
+app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
